@@ -1,12 +1,11 @@
 ﻿{
-  "name": "local-soundsnap-like",
+  "name": "soundsnap-express-app",
   "version": "1.0.0",
-  "private": true,
-  "description": "Local audio catalog with waveform previews and a wavesurfer player",
-  "main": "server.js",
+  "description": "Express app for browsing and playing audio files",
+  "main": "index.js",
   "scripts": {
     "build": "node -e \"process.exit(0)\"",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": "20.x"

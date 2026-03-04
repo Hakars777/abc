@@ -103,7 +103,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, error: String(err && err.message ? err.message : err) });
 });
 
-app.listen(PORT, HOST, () => {
-  console.log(`Server: ${HOST}:${PORT}`);
-  console.log(`Audio dir: ${AUDIO_DIR}`);
-});
+if (require.main === module) {
+  app.listen(PORT, HOST, () => {
+    console.log(`Server: ${HOST}:${PORT}`);
+    console.log(`Audio dir: ${AUDIO_DIR}`);
+  });
+}
+
+module.exports = app;
