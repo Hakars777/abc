@@ -5,10 +5,11 @@
   "description": "Local audio catalog with waveform previews and a wavesurfer player",
   "main": "server.js",
   "scripts": {
+    "build": "node -e \"process.exit(0)\"",
     "start": "node server.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": "20.x"
   },
   "dependencies": {
     "express": "^4.19.2"
