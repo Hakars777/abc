@@ -1,0 +1,7 @@
+node_modules/
+npm-debug.log*
+.env
+.tools/
+audio/*
+!audio/QAYLUM EM.mp3
+!audio/SUT@.mp3
