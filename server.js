@@ -5,9 +5,6 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
-const HOST = process.env.HOST || '0.0.0.0';
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const AUDIO_DIR = process.env.AUDIO_DIR
   ? path.resolve(process.env.AUDIO_DIR)
@@ -102,12 +99,5 @@ app.use('/', express.static(PUBLIC_DIR, {
 app.use((err, req, res, next) => {
   res.status(500).json({ ok: false, error: String(err && err.message ? err.message : err) });
 });
-
-if (require.main === module) {
-  app.listen(PORT, HOST, () => {
-    console.log(`Server: ${HOST}:${PORT}`);
-    console.log(`Audio dir: ${AUDIO_DIR}`);
-  });
-}
 
 module.exports = app;

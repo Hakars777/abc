@@ -1,11 +1,11 @@
 ﻿{
-  "name": "soundsnap-express-app",
+  "name": "abc",
   "version": "1.0.0",
-  "description": "Express app for browsing and playing audio files",
-  "main": "index.js",
+  "description": "Express application for browsing and playing audio files",
+  "main": "app.js",
   "scripts": {
     "build": "echo Build complete",
-    "start": "node index.js"
+    "start": "node app.js"
   },
   "engines": {
     "node": "20.x"
