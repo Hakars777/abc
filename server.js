@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 const express = require('express');
 const path = require('path');
@@ -91,7 +91,6 @@ app.use('/', express.static(PUBLIC_DIR, {
   etag: true,
   maxAge: 0,
   setHeaders: (res) => {
-    // Local dev convenience: always fetch the latest JS/CSS/HTML on refresh.
     res.setHeader('Cache-Control', 'no-store');
   }
 }));
