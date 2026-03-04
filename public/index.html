@@ -1,89 +1,137 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Local Audio Catalog</title>
+  <title>Soundsnap Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="topbar">
-    <div class="brand">
-      <div class="logo">SN</div>
-      <div class="title">Local Sounds</div>
-    </div>
-
-    <div class="search">
-      <input id="searchInput" type="text" placeholder="Поиск по названию / пути..." autocomplete="off" />
-      <div class="hint" id="hint"></div>
-    </div>
-
-    <div class="right">
-      <button id="rescanBtn" class="btn">Обновить</button>
-    </div>
-  </div>
-
-  <div class="layout">
-    <div class="left">
-      <div class="listHeader">
-        <div class="lhTitle">Файлы</div>
-        <div class="lhMeta" id="countLabel">0</div>
+  <div class="pageShell">
+    <header class="topbar">
+      <div class="brandCluster">
+        <div class="brand">
+          <div class="logo">SN</div>
+          <div>
+            <div class="eyebrow">Audio browser</div>
+            <div class="title">Soundsnap Studio</div>
+          </div>
+        </div>
+        <div class="heroTag">Clean local library, fast previews, one-click playback.</div>
       </div>
 
-      <div id="list" class="list"></div>
-    </div>
-
-    <div class="main">
-      <div class="playerCard">
-        <div class="playerTop">
-          <div class="trackInfo">
-            <div id="nowTitle" class="nowTitle">Ничего не выбрано</div>
-            <div id="nowPath" class="nowPath"></div>
-          </div>
-
-          <div class="controls">
-            <button id="prevBtn" class="btn">Prev</button>
-            <button id="playBtn" class="btn primary">Play</button>
-            <button id="nextBtn" class="btn">Next</button>
-          </div>
-        </div>
-
-        <div class="waveWrap">
-          <div id="mainWave" class="mainWave"></div>
-        </div>
-
-        <div class="playerBottom">
-          <div class="sliderGroup">
-            <label class="lbl">Громкость</label>
-            <input id="vol" type="range" min="0" max="1" value="0.9" step="0.01" />
-          </div>
-
-          <div class="sliderGroup">
-            <label class="lbl">Скорость</label>
-            <input id="rate" type="range" min="0.5" max="2" value="1" step="0.05" />
-            <div id="rateVal" class="val">1.00×</div>
-          </div>
-
-          <div class="timeGroup">
-            <div id="timeCur" class="time">0:00</div>
-            <div class="timeSep">/</div>
-            <div id="timeDur" class="time">0:00</div>
-          </div>
-        </div>
-
-        <div id="unlock" class="unlock hidden">
-          Нажми в любое место страницы, чтобы браузер разрешил AudioContext (нужно для waveform-preview).
-        </div>
+      <div class="searchPanel">
+        <label class="searchLabel" for="searchInput">Быстрый поиск</label>
+        <input id="searchInput" type="text" placeholder="Поиск по названию / пути..." autocomplete="off" />
+        <div class="hint" id="hint"></div>
       </div>
 
-      <div class="noteCard">
-        <div class="noteTitle">Как работает</div>
-        <div class="noteText">
-          Сервер читает папку <span class="mono">./audio</span>, фронтенд строит preview-waveform через Web Audio и кеширует peaks+duration в localStorage.
-          Большой waveform и плеер — wavesurfer.js.
-        </div>
+      <div class="topActions">
+        <div class="liveBadge">Express + WaveSurfer</div>
+        <button id="rescanBtn" class="btn">Обновить</button>
       </div>
-    </div>
+    </header>
+
+    <main class="layout">
+      <section class="left">
+        <div class="listHeader">
+          <div>
+            <div class="lhEyebrow">Library</div>
+            <div class="lhTitle">Файлы</div>
+          </div>
+          <div class="lhMeta" id="countLabel">0</div>
+        </div>
+
+        <div id="list" class="list"></div>
+      </section>
+
+      <section class="main">
+        <div class="heroGrid">
+          <div class="playerCard">
+            <div class="playerTop">
+              <div class="trackInfo">
+                <div class="nowLabel">Now playing</div>
+                <div id="nowTitle" class="nowTitle">Ничего не выбрано</div>
+                <div id="nowPath" class="nowPath"></div>
+              </div>
+
+              <div class="controls">
+                <button id="prevBtn" class="btn ghost">Prev</button>
+                <button id="playBtn" class="btn primary">Play</button>
+                <button id="nextBtn" class="btn ghost">Next</button>
+              </div>
+            </div>
+
+            <div class="waveWrap">
+              <div class="waveChrome"></div>
+              <div id="mainWave" class="mainWave"></div>
+            </div>
+
+            <div class="playerBottom">
+              <div class="sliderGroup">
+                <label class="lbl" for="vol">Громкость</label>
+                <input id="vol" type="range" min="0" max="1" value="0.9" step="0.01" />
+              </div>
+
+              <div class="sliderGroup rateGroup">
+                <label class="lbl" for="rate">Скорость</label>
+                <input id="rate" type="range" min="0.5" max="2" value="1" step="0.05" />
+                <div id="rateVal" class="val">1.00x</div>
+              </div>
+
+              <div class="timeGroup">
+                <div id="timeCur" class="time">0:00</div>
+                <div class="timeSep">/</div>
+                <div id="timeDur" class="time">0:00</div>
+              </div>
+            </div>
+
+            <div id="unlock" class="unlock hidden">
+              Нажми в любое место страницы, чтобы браузер разрешил AudioContext для waveform-preview.
+            </div>
+          </div>
+
+          <aside class="noteCard">
+            <div class="noteHead">
+              <div>
+                <div class="noteEyebrow">Workflow</div>
+                <div class="noteTitle">Что внутри</div>
+              </div>
+              <div class="noteBadge">Local cache</div>
+            </div>
+
+            <div class="noteText">
+              Сервер читает папку <span class="mono">./audio</span>, интерфейс строит waveform-превью через Web Audio,
+              а peaks и длительность кешируются в localStorage для более быстрого повторного открытия.
+            </div>
+
+            <div class="miniStats">
+              <div class="statPill">Preview queue</div>
+              <div class="statPill">Wave cache</div>
+              <div class="statPill">Hotkeys ready</div>
+            </div>
+
+            <div class="tipList">
+              <div class="tipRow">
+                <span class="tipKey">Space</span>
+                <span>play / pause</span>
+              </div>
+              <div class="tipRow">
+                <span class="tipKey">Left</span>
+                <span>предыдущий трек</span>
+              </div>
+              <div class="tipRow">
+                <span class="tipKey">Right</span>
+                <span>следующий трек</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
